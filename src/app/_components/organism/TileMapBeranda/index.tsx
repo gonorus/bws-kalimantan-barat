@@ -12,7 +12,6 @@ function AddMapWatermark() {
   );
   if (attributionElements.length > 0) {
     const attributionParent = attributionElements[0].parentElement;
-    // attributionElements[0].remove();
     attributionParent?.childNodes.forEach((childNode) => childNode.remove());
 
     const attributionElement = document.createElement('a');
@@ -40,7 +39,7 @@ export default function TileMapBeranda() {
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png"
+        url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
       <LayersControl position="topright">
