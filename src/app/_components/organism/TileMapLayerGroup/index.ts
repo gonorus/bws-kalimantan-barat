@@ -1,0 +1,1 @@
+export { default as PosCurahHujan } from './PosCurahHujan'
