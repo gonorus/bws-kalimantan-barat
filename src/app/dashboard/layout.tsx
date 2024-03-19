@@ -21,7 +21,7 @@ export default function DashboardLayout({
       }}
     >
       <NavigationBar />
-      <Box flexGrow={1} overflow="hidden">
+      <Box flexGrow={1} overflow="auto">
         {children}
       </Box>
     </Stack>

@@ -19,7 +19,9 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@OrganismComponents/*": ["./src/app/_components/organism/*"]
+      "@AtomComponents/*": ["./src/app/_components/atoms/*"],
+      "@OrganismComponents/*": ["./src/app/_components/organism/*"],
+      "@TemplateComponents/*": ["./src/app/_components/template/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
