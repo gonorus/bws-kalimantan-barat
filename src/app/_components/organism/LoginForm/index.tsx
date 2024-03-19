@@ -2,14 +2,17 @@
 
 import { Button, Stack, TextField, Typography } from '@mui/material';
 import Image from 'next/image';
-import { MouseEvent, useRef } from 'react';
+import { useRouter } from 'next/navigation';
+import { FormEvent, useRef } from 'react';
 
 export default function LoginForm() {
+  const router = useRouter();
   const usernameInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
-  const OnSubmitHandler = (evt: MouseEvent<HTMLElement>) => {
+  const OnSubmitHandler = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+    router.replace('dashboard');
   };
 
   return (
@@ -49,7 +52,7 @@ export default function LoginForm() {
         </Typography>
       </Stack>
 
-      <form>
+      <form onSubmit={OnSubmitHandler}>
         <Stack direction="column" gap="8px">
           <TextField
             inputRef={usernameInputRef}
@@ -72,12 +75,7 @@ export default function LoginForm() {
             autoComplete="false"
             fullWidth
           />
-          <Button
-            variant="contained"
-            type="submit"
-            onClick={OnSubmitHandler}
-            fullWidth
-          >
+          <Button variant="contained" type="submit" fullWidth>
             LOGIN
           </Button>
         </Stack>

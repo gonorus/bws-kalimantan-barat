@@ -1,45 +1,78 @@
 'use client';
 
+import NextLink from 'next/link';
 import {
   AppBar,
   Box,
   Button,
-  Container,
+  Link,
   Stack,
   Toolbar,
   Typography,
 } from '@mui/material';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import UserMenu from '@OrganismComponents/UserMenu';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
-const pages = ['Beranda', 'Penanganan', 'Statistik'];
+const pages = [
+  { label: 'Beranda', path: ['/dashboard'] },
+  { label: 'Penanganan', path: ['404'] },
+  {
+    label: 'Statistik',
+    path: [
+      '/dashboard/statistik/infografis-bencana',
+      '/dashboard/statistik/daerah-rawan-bencana',
+    ],
+  },
+];
+
+function NavigationButton(
+  props: PropsWithChildren<{ href: string; active?: boolean }>
+) {
+  return (
+    <Link
+      href={props.href}
+      component={NextLink}
+      sx={{
+        textDecoration: 'none',
+        textAlign: 'center',
+      }}
+    >
+      <Button
+        variant="text"
+        type="button"
+        color="inherit"
+        sx={{
+          color: '#FFFFFF',
+          textTransform: 'capitalize',
+          borderBottom: `${props.active ? 'solid 3px #87CEFA' : 'unset'}`,
+          fontSize: '12px',
+          borderRadius: 'unset',
+        }}
+        fullWidth
+      >
+        {props.children}
+      </Button>
+    </Link>
+  );
+}
 
 export default function NavigationBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+  const CurrentPath = usePathname();
 
   const AvailableMenus = React.useMemo(
     () =>
       pages.map((page) => (
-        <Button
-          key={page}
-          onClick={handleCloseNavMenu}
-          sx={{ color: '#FFFFFF', fontSize: 12, textTransform: 'capitalize' }}
+        <NavigationButton
+          key={page.label}
+          href={page.path[0]}
+          active={page.path.some((path) => path === CurrentPath)}
         >
-          {page}
-        </Button>
+          {page.label}
+        </NavigationButton>
       )),
-    []
+    [CurrentPath]
   );
 
   return (
@@ -94,7 +127,7 @@ export default function NavigationBar() {
             </Stack>
           </Typography>
 
-          <Box display="flex" flexGrow={1} justifyContent="flex-end">
+          <Box display="flex" flexGrow={1} justifyContent="flex-end" gap="8px">
             {AvailableMenus}
           </Box>
 
