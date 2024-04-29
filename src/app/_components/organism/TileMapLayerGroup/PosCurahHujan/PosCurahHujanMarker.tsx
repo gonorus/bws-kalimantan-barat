@@ -1,6 +1,7 @@
-import { Marker, MarkerProps, Tooltip } from 'react-leaflet';
+import { Marker, Popup, Tooltip } from 'react-leaflet';
 import { PosCurahHujanToolTipInfo } from './PosCurahHujanToolTipInfo';
-import { Icon, Point } from 'leaflet';
+import { Icon, Point, LatLngExpression } from 'leaflet';
+import { IDevice } from '@Infrastructures/DeviceStations';
 
 const PosCurahHujanIcon = new Icon({
   iconUrl: './muka-air.png',
@@ -8,9 +9,21 @@ const PosCurahHujanIcon = new Icon({
   iconSize: new Point(30, 30),
 });
 
-export function PosCurahHujanMarker(props: MarkerProps) {
+type PosCurahHujanMarkerProps = {
+  position: LatLngExpression;
+  device: IDevice;
+};
+
+export function PosCurahHujanMarker({
+  position,
+  device,
+}: PosCurahHujanMarkerProps) {
+  const OnPopupClosed = () => {
+    console.debug('[GonoDebug] popup is been closed');
+  };
   return (
-    <Marker {...props} icon={PosCurahHujanIcon}>
+    <Marker icon={PosCurahHujanIcon} position={position}>
+      <Popup>Popup for Marker</Popup>
       <Tooltip
         className="pos-curah-hujan-info"
         direction="top"
@@ -18,7 +31,7 @@ export function PosCurahHujanMarker(props: MarkerProps) {
         opacity={1}
         permanent
       >
-        <PosCurahHujanToolTipInfo />
+        <PosCurahHujanToolTipInfo device={device} />
       </Tooltip>
     </Marker>
   );

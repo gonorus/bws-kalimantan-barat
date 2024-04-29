@@ -18,10 +18,10 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
       "@AtomComponents/*": ["./src/app/_components/atoms/*"],
       "@OrganismComponents/*": ["./src/app/_components/organism/*"],
       "@TemplateComponents/*": ["./src/app/_components/template/*"],
+      "@Infrastructures/*": ["./src/app/_infrastructures/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
